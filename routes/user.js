@@ -3,7 +3,7 @@ var User = require("../models/user");
 
 
 router.get('/signup', function(req, res, next) {
-  console.log(req.flash('errors'));
+  //console.log(req.flash('errors'));
   res.render('accounts/signup', {
     errors: req.flash('errors')
   });
