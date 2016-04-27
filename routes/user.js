@@ -3,8 +3,6 @@ var User = require("../models/user");
 
 
 router.get('/signup', function(req, res, next) {
-  //console.log('signup errors=');
-
   res.render('accounts/signup', {
     errors: req.flash('errors'),
     test: "1234"
