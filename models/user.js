@@ -19,7 +19,8 @@ var UserSchema = new Schema({
   
 });
 
-// Hast the password before we even save it to the database
+// Hash the password before we even save it to the database
+// pre: pre-hook 
 UserSchema.pre('save', function(next){
   var user = this;
   if(!user.isModified('password')) return next();
