@@ -19,18 +19,18 @@ passport.use('local-login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
-}, function(req, email, password, done) {
+}, function(req, email, password, next) {
   User.findOne({
     email: email
   }, function(err, user) {
-    if (err) return done(err);
+    if (err) return next(err);
     if (!user) {
-      return done(null, false, req.flash('loginMessage', 'No user has been found'))
+      return next(null, false, req.flash('loginMessage', 'No user has been found'))
     }
     if (!user.comparePassword(password)) {
-      return done(null, false, req.flash('loginMessage', 'Oops! Wrong passowrd pal'));
+      return next(null, false, req.flash('loginMessage', 'Oops! Wrong passowrd pal'));
     }
-    return done(null, user);
+    return next(null, user);
   })
 }));
 
