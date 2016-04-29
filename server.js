@@ -1,21 +1,23 @@
+// libs
 var express = require('express');
 var morgan = require("morgan"); // http request logger
 var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
+var bodyParser = require("body-parser"); // http body
 var ejs = require('ejs');
 var ejsMate = require('ejs-mate');
-
-var mainRoutes = require("./routes/main");
-var userRoutes = require("./routes/user");
-var adminRoutes = require("./routes/admin");
-
 var session = require("express-session");
 var cookieParser = require("cookie-parser");
 var flash = require("express-flash");
 var MongoStore = require("connect-mongo/es5")(session);
 var passport = require("passport");
 
+// routers
+var mainRoutes = require("./routes/main");
+var userRoutes = require("./routes/user");
+var adminRoutes = require("./routes/admin");
+var apiRoutes = require("./api/api");
 
+// models
 var secret = require("./config/secret");
 var User = require("./models/user");
 var Category = require("./models/category");
@@ -31,7 +33,6 @@ mongoose.connect(secret.database, function (err) {
   }
 
 })
-
 
 // Middleware
 app.use(express.static(__dirname + '/public'));
@@ -74,6 +75,7 @@ app.set('view engine', 'ejs');
 app.use(mainRoutes);
 app.use(userRoutes);
 app.use(adminRoutes);
+app.use('/api', apiRoutes);
 
 
 // app.get("/", function(req, res){
