@@ -1,4 +1,4 @@
-<% layout('layout') -%>
+<% layout('layout') %>
 
 <div class="container">
 
@@ -6,12 +6,12 @@
     <div class="col-sm-6 col-md-4">
       <img class="img-circle img-responsive img-center" src="<%= user.profile.picture %>" alt="">
 
-      <br />
+      <br/>
       <p>Name: <%= user.profile.name %></p>
       <p>Email: <%= user.email %></p>
 
       <% if (user.address === "" || typeof user.address === 'undefined')  { %>
-        <p>Address: <span style="color: #c0392b; font-weight: bold">You have no address</span></p>
+      <p>Address: <span style="color: #c0392b; font-weight: bold">You have no address</span></p>
 
       <% } else { %>
 
@@ -20,6 +20,34 @@
       <% } %>
 
       <a href="/edit-profile" class="btn btn-primary btn-lg">Edit Profile</a>
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-center">History</h2>
+      <table class="table table-striped sticky-header">
+        <thead>
+        <tr>
+          <th>Item's Name</th>
+          <th class="text-right">Paid:</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% var totalPaid = 0; %>
+        <% for(var i = 0;i < user.history.length; i++) { %>
+        <% totalPaid += user.history[i].paid %>
+        <tr>
+          <td><%= user.history[i].item.name %></td>
+          <td class="text-right"><%= user.history[i].paid %></td>
+        </tr>
+        <% } %>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td>Total:</td>
+          <td class="text-right"><%= totalPaid %></td>
+        </tr>
+        </tfoot>
+      </table>
     </div>
   </div>
 </div>

@@ -13,9 +13,8 @@ var UserSchema = new Schema({
   },
   address: String,
   history: [{
-    date: Date,
     paid: { type: Number, default: 0},
-    // item: {type: Schema.Types.ObjectId, ref: '' }
+    item: {type: Schema.Types.ObjectId, ref: 'Product' }
   }],
   
 });
@@ -34,8 +33,6 @@ UserSchema.pre('save', function(next){
     })
   });
 });
-
-
 
 // Compare password in the database and the one that the user type in
 UserSchema.methods.comparePassword = function(password) {
