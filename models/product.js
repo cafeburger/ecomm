@@ -13,7 +13,7 @@ var ProductSchema = new Schema({
 
 ProductSchema.plugin(mongoosastic,{
   hosts:[
-    'localhost:9200'
+    'cafeburger.myqnapcloud.com:9200'
   ]
 });
 
